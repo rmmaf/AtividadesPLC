@@ -7,7 +7,7 @@ public class Questao2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		AtomicInteger saldo = new AtomicInteger();
+		AtomicInteger saldo = new AtomicInteger(); 
 		for(int i = 0; i < 6; i++) {
 			(new PessoaAt(saldo)).start();
 		}
