@@ -23,7 +23,6 @@ public class Pad {
 			(new Assar(forno)).start();
 		}
 	}
-
 }
 class Assar extends Thread {
 	private Forno forno;
@@ -40,7 +39,6 @@ class Assar extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }
 class Colocar extends Thread {
@@ -61,7 +59,8 @@ class Forno {
 		queue = new LinkedBlockingDeque<>(50);
 	}
 	
-	public synchronized void retirar() {
+	public synchronized  void retirar() {
+		
 		if(queue.size() == 50) {
 			while(!queue.isEmpty()) {
 				try {

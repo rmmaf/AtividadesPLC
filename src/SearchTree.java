@@ -52,9 +52,8 @@ class Tree {
 	}
 	synchronized private Node addRecursive(Node current, int value) {
 		if (current == null) {
-			synchronized(this) {
 				init++;
-			}
+			
 			return new Node(value);
 		}
 

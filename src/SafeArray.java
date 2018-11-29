@@ -23,7 +23,7 @@ public class SafeArray extends Thread {
         System.out.println("get: " + i);
         return v;
     }
-
+   
     public void set(int v) {
         list.add(v);
         locks.add(new ReentrantLock());
