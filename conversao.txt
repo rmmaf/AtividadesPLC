@@ -1,0 +1,12 @@
+synchronized public void nunes(){
+    //codigo
+}
+//conversao
+Lock lock = new ReentrantLock();
+public void nunes(){
+    boolean cond = lock.tryLock();
+    while(!cond){
+        //codigo
+    }
+    lock.unlock();
+}
