@@ -14,23 +14,27 @@ lento que o abastecimento dele, devido ao tempo necessário para assar os pães
 public class Padaria {
 	private BlockingQueue<Boolean> forno;
 	private boolean sinalColocar;
-	private final long tempoAssar = 3000;//3 segundos
+	private final long tempoAssar = 10;
 	public Padaria() {
 		forno = new LinkedBlockingDeque<>(50);
 		sinalColocar = true;
 	}
 	
 	synchronized public void retirar() throws InterruptedException {
-		if(forno.isEmpty()) {
+		if(forno.isEmpty()) {//nao eh necessario ja que estamos usando blockingqueue mas coloquei devido ao fato de ter de esperar assar
 			wait();
-		}//nao eh necessario ja que estamos usando blockingqueue mas coloquei devido ao fato de ter de esperar assar
+		}
 		long tempoEstimado = System.currentTimeMillis() + tempoAssar;
 		while(System.currentTimeMillis() < tempoEstimado) {/*assando*/}
 		for(int i = 0; i < 10; i++) {
 			forno.take();
 		}
+		System.out.println("Retirados 10 paes");
 		if(forno.size() == 0) {
 			sinalColocar = true;
+			System.out.println("Forno esvaziado");
+		} else {
+			sinalColocar = false;
 		}
 		notifyAll();
 	}
@@ -40,11 +44,14 @@ public class Padaria {
 			wait();
 		}
 		for(int i = 0; i < 10; i++) {
-			forno.put(true);;
+			forno.put(true);
 		}
 		if(forno.size() == 50) {
 			sinalColocar = false;
+		} else {
+			sinalColocar = true;
 		}
+		System.out.println("Colocados 10 pães");
 		notifyAll();
 	}
 	
